@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Board from './Board';
+import './Game.css';
 
 export default class Game extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class Game extends Component {
         const current = history[history.length-1];
         
         const isChecked = current.squares[i];
-        const isEnd = this.state.isEnd;
+        const isEnd = this.calculateWinner(current.squares);
         if(isChecked || isEnd) {
             return;
         }
@@ -78,9 +79,9 @@ export default class Game extends Component {
             status = "Next Player: " + (this.state.xIsNext ? 'X' : 'O');
         }
 
-        if (winner && !this.state.isEnd) {
-            this.setState({isEnd: true});
-        }
+        //if (winner && !this.state.isEnd) {
+        //    this.setState({isEnd: true});
+        //}
 
         const moves = history.map((step, move) => {
             const desc = move ? "Go to move #" + move : "Go to start";
@@ -94,12 +95,10 @@ export default class Game extends Component {
         return (
         <div className="game">
             <div className="game-board">
-                <Board
-                    squares={current.squares}
-                    onClick={(i) => this.handleClick(i)} />
+                <Board squares={current.squares} onClick={(i) => this.handleClick(i)} />
             </div>
             <div className="game-info">
-                <div>{status}</div>
+                <h2>{status}</h2>
                 <ol>{moves}</ol>
             </div>
         </div>

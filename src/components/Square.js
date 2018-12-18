@@ -1,9 +1,18 @@
 import React from 'react'
+import './Square.css'
 
 export default function Square(props) {
-    return (
-      <button className="square" onClick={() => props.onClick()}>
-        { props.value }
-      </button>
-    )
+  const value = props.value;
+  let style = 'base-square';
+  if (value && value === 'O') {
+    style += ' square-o';
+  } else if (value && value === 'X') {
+    style += ' square-x';
+  }
+
+  return (
+    <button className={style} onClick={() => props.onClick()}>
+      { props.value }
+    </button>
+  )
 }

@@ -1,0 +1,8 @@
+.game {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.game-title {
+    font-size: 24pt;
+    font-weight: 600;
+}
