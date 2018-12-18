@@ -10,17 +10,6 @@
     box-shadow: 0px 5px 5px #e9ecef;
 }
 
-.square-o {
-    transition: 300ms ease-out;
-    color: black;
-    background: #f8f9fa;
-}
-
-.square-x {
-    transition: 300ms ease-out;
-    background: #343a40;
-}
-
 .base-square:hover {
     transition: 300ms;
     box-shadow: 0px 5px 5px #dee2e6;
@@ -28,4 +17,15 @@
 
 .base-square:focus {
     outline: 0;
+}
+
+.square-o {
+    transition: 600ms ease-out;
+    color: black;
+    background: #f8f9fa;
+}
+
+.square-x {
+    transition: 600ms ease-out;
+    background: #343a40;
 }

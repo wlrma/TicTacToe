@@ -1,7 +1,7 @@
 import React from 'react'
 import './Square.css'
 
-export default function Square(props) {
+export default (props) => {
   const value = props.value;
   let style = 'base-square';
   if (value && value === 'O') {
