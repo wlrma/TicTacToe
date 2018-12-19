@@ -12,8 +12,8 @@ export default class Game extends Component {
             }],
             stepNumber: 0,
             xIsNext: true,
-            isEnd: false
-        }
+            show: false
+        };
     }
 
     handleClick(i) {
@@ -22,12 +22,22 @@ export default class Game extends Component {
         
         const isChecked = current.squares[i];
         const isEnd = this.calculateWinner(current.squares);
+
         if(isChecked || isEnd) {
             return;
         }
 
         const newSquares = current.squares.slice();
         newSquares[i] = this.state.xIsNext ? 'X' : 'O';
+
+        const winner = this.calculateWinner(newSquares);
+        const hasNullSquare = newSquares.includes(null);
+
+        if (winner) {
+            this.props.showModal("🎉  " + winner + "가 이겼습니다!");
+        } else if (!winner && !hasNullSquare) {
+            this.props.showModal("🧐 비겼습니다.");
+        }
 
         this.setState({
             history: history.concat([{
@@ -72,16 +82,16 @@ export default class Game extends Component {
         const current = history[this.state.stepNumber];
         const winner = this.calculateWinner(current.squares);
 
+        const hasNullSquare = current.squares.includes(null);
+
         let status;
         if (winner) {
             status = "Winner: " + winner;
+        } else if (!winner && !hasNullSquare) {
+            status = "Draw";
         } else {
             status = "Next Player: " + (this.state.xIsNext ? 'X' : 'O');
         }
-
-        //if (winner && !this.state.isEnd) {
-        //    this.setState({isEnd: true});
-        //}
 
         const moves = history.map((step, move) => {
             const desc = move ? "Go to move #" + move : "Go to start";
